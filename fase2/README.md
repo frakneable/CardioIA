@@ -23,6 +23,7 @@ diagnósticos e classifica o risco para priorizar a triagem.
 | 2 | Base de 200 frases rotuladas (alto/baixo risco) | [`parte2/frases_risco.csv`](parte2/frases_risco.csv) |
 | 2 | Frases adversariais para testar distorções | [`parte2/frases_adversariais.csv`](parte2/frases_adversariais.csv) |
 | 2 | Notebook com TF-IDF, classificação e avaliação | [`parte2/classificador_risco.ipynb`](parte2/classificador_risco.ipynb) |
+| Ir Além 2 | Rede neural MLP (Keras) que classifica imagens de ECG em normal/anormal | [`ir_alem_2/`](ir_alem_2/README.md) |
 
 ## 🗂️ Estrutura
 
@@ -30,6 +31,7 @@ diagnósticos e classifica o risco para priorizar a triagem.
 fase2/
 ├── parte1/      # frases, mapa de conhecimento, extrator e resultados
 ├── parte2/      # base rotulada, frases adversariais e notebook do classificador
+├── ir_alem_2/   # MLP para imagens de ECG: notebook, exemplos de imagens e README próprio
 └── tests/       # validação automatizada dos artefatos
 ```
 
@@ -168,6 +170,17 @@ A seção 8 do notebook detalha cada distorção e propõe mitigações: marcaç
 negação, normalização de sinônimos com o mapa da Parte 1, regras de bandeira
 vermelha acima do modelo, ajuste de limiar, dados mais diversos e humano no
 circuito.
+
+---
+
+## Ir Além 2 — Diagnóstico visual de ECG com MLP
+
+Cada batimento do dataset MIT-BIH (Kaggle) é desenhado como imagem,
+pré-processado (tons de cinza, 32×32, normalização) e classificado por uma MLP
+em Keras. No teste, com a proporção real de 83% de normais, a rede chega a
+**95,9% de acurácia e 94,9% de recall de anormal**, contra 82,8% de acurácia e
+0% de recall de um modelo que responde sempre "normal". Detalhes, resultados e
+vídeo próprio estão em [`ir_alem_2/README.md`](ir_alem_2/README.md).
 
 ---
 
