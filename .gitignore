@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 fase1/data/tmp/
 .DS_Store
+
+# Material local, fora da entrega
+task.txt
+.claude/
+fase2/ROTEIRO_VIDEO.md
+.pytest_cache/

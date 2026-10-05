@@ -1,5 +1,8 @@
 # CardioIA — Fase 1: Batimentos de Dados
 
+> **Fases do projeto:** Fase 1 (este documento) ·
+> [Fase 2 — Diagnóstico Automatizado](fase2/README.md)
+
 Projeto acadêmico FIAP. Esta fase levanta, organiza e documenta as três bases de
 dados que alimentarão os módulos de Machine Learning, NLP, Visão Computacional e
 IoT do CardioIA nas fases seguintes.

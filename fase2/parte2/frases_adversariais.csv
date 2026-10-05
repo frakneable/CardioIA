@@ -1,0 +1,21 @@
+frase,situacao_esperada,tipo
+"não sinto dor no peito nem falta de ar, só um pouco de coceira",baixo risco,negação
+"não tenho falta de ar, só vim renovar a receita",baixo risco,negação
+"nunca desmaiei, mas estou com dor de garganta",baixo risco,negação
+sinto uma dor leve no peito e um pouco de falta de ar,alto risco,intensidade atenuada
+tenho um leve aperto no peito que vai para o braço,alto risco,intensidade atenuada
+apresento precordialgia em opressão há quarenta minutos,alto risco,termo técnico
+estou com dispneia súbita e sudorese,alto risco,termo técnico
+tive uma síncope hoje cedo,alto risco,termo técnico
+tô com o coração saindo pela boca e a vista apagando,alto risco,linguagem coloquial
+deu um troço no peito e o braço ficou mole,alto risco,linguagem coloquial
+"meu pai teve infarto ano passado, mas eu estou bem e vim fazer check-up",baixo risco,contexto familiar
+minha tia tem insuficiência cardíaca e eu quero saber como prevenir,baixo risco,contexto familiar
+dor no peitu e falta de ar,alto risco,erro de digitação
+to com dor nu peito e suano frio,alto risco,erro de digitação
+acordei e não consigo mexer o lado direito do corpo,alto risco,grave sem termo óbvio
+minha avó está muito sonolenta e com a pele fria e úmida,alto risco,grave sem termo óbvio
+"senti dor no peito depois de levar uma bolada, mas já passou",baixo risco,termo alarmante em contexto leve
+"senti o coração acelerado vendo o jogo, mas logo normalizou",baixo risco,termo alarmante em contexto leve
+tenho 80 anos e estou só muito cansada e enjoada desde ontem,alto risco,apresentação atípica
+sou mulher de 55 anos e sinto um cansaço estranho e azia que não melhora,alto risco,apresentação atípica

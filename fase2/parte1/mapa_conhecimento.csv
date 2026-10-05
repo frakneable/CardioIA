@@ -1,0 +1,65 @@
+sintoma_1,sintoma_2,doenca_associada,peso
+dor no peito,aperto no tórax,Infarto Agudo do Miocárdio,2
+aperto no peito,peso no peito,Infarto Agudo do Miocárdio,3
+irradia para o braço esquerdo,dor no braço esquerdo,Infarto Agudo do Miocárdio,3
+dor na mandíbula,dor que vai para o queixo,Infarto Agudo do Miocárdio,2
+suando frio,suor frio,Infarto Agudo do Miocárdio,3
+dor no peito em repouso,dor no peito que não passa,Infarto Agudo do Miocárdio,3
+náusea,enjoo,Infarto Agudo do Miocárdio,1
+sensação de morte,medo de morrer,Infarto Agudo do Miocárdio,2
+dor no peito,aperto no tórax,Angina,2
+aperto no peito,peso no peito,Angina,2
+quando subo a escada,quando faço esforço,Angina,3
+dor no peito ao caminhar,dor no peito ao subir ladeira,Angina,3
+minutos de repouso,melhora com repouso,Angina,3
+passa quando paro,alivia quando descanso,Angina,3
+falta de ar,dificuldade para respirar,Angina,1
+dor no peito ao me emocionar,dor no peito no frio,Angina,2
+cansaço constante,fadiga,Insuficiência Cardíaca,2
+tornozelos inchados,inchaço nos tornozelos,Insuficiência Cardíaca,3
+pés inchados,pernas inchadas,Insuficiência Cardíaca,2
+dois travesseiros,dormir sentado,Insuficiência Cardíaca,3
+deitado fico sem ar,falta de ar ao deitar,Insuficiência Cardíaca,3
+acordo sem ar,acordo sufocado,Insuficiência Cardíaca,3
+tosse seca à noite,tosse à noite,Insuficiência Cardíaca,2
+ganhei peso rápido,ganhei três quilos,Insuficiência Cardíaca,2
+falta de ar quando faço esforço,falta de ar aos esforços,Insuficiência Cardíaca,2
+falta de ar,dificuldade para respirar,Insuficiência Cardíaca,1
+barriga inchada,inchaço na barriga,Insuficiência Cardíaca,1
+coração disparado,coração acelerado,Arritmia (Fibrilação Atrial),3
+fora do ritmo,batimento irregular,Arritmia (Fibrilação Atrial),3
+palpitações,palpitação,Arritmia (Fibrilação Atrial),3
+coração falhando,falha nos batimentos,Arritmia (Fibrilação Atrial),3
+tontura,vertigem,Arritmia (Fibrilação Atrial),1
+desmaiei,desmaio,Arritmia (Fibrilação Atrial),2
+cansaço constante,fadiga,Arritmia (Fibrilação Atrial),1
+dor de cabeça na nuca,dor na nuca,Hipertensão Arterial,3
+pressão estava alta,pressão alta,Hipertensão Arterial,3
+vista embaçada,visão embaçada,Hipertensão Arterial,2
+zumbido no ouvido,zumbido,Hipertensão Arterial,2
+sangramento no nariz,sangue pelo nariz,Hipertensão Arterial,2
+tontura,vertigem,Hipertensão Arterial,1
+dor de cabeça,cefaleia,Hipertensão Arterial,1
+dor no peito em pontada,dor em pontada,Pericardite,2
+piora quando respiro fundo,piora ao respirar,Pericardite,3
+inclino para frente,inclinar para frente,Pericardite,3
+piora ao deitar,piora quando deito,Pericardite,2
+depois de uma gripe,após uma gripe,Pericardite,2
+febre,febril,Pericardite,1
+dor no peito,aperto no tórax,Pericardite,1
+dor ao respirar,dor quando respiro,Pericardite,2
+sopro no coração,sopro cardíaco,Valvopatia,3
+desmaiei,desmaio,Valvopatia,3
+falta de ar quando faço esforço,falta de ar aos esforços,Valvopatia,2
+falta de ar,dificuldade para respirar,Valvopatia,1
+tontura,vertigem,Valvopatia,1
+dor no peito ao fazer esforço,aperto no peito ao fazer esforço,Valvopatia,2
+panturrilha inchada,inchaço na panturrilha,TVP / Embolia Pulmonar,3
+panturrilha dolorida,dor na panturrilha,TVP / Embolia Pulmonar,3
+perna inchada de um lado só,uma perna mais inchada,TVP / Embolia Pulmonar,3
+viagem de ônibus,viagem longa,TVP / Embolia Pulmonar,2
+muito tempo acamado,depois de uma cirurgia,TVP / Embolia Pulmonar,2
+falta de ar súbita,falta de ar repentina,TVP / Embolia Pulmonar,3
+dor ao respirar,dor quando respiro,TVP / Embolia Pulmonar,2
+tossindo sangue,tosse com sangue,TVP / Embolia Pulmonar,3
+falta de ar,dificuldade para respirar,TVP / Embolia Pulmonar,1
