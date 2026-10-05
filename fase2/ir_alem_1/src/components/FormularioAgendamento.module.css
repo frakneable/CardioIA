@@ -1,0 +1,102 @@
+.form {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.titulo {
+  font-size: var(--text-lg);
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.campo {
+  display: grid;
+  gap: 0.375rem;
+  align-content: start;
+}
+
+.campo label {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.opcional {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #b9c7cc;
+  border-radius: var(--radius-control);
+  background: var(--paper);
+}
+
+.campo textarea {
+  resize: vertical;
+}
+
+.campo [aria-invalid='true'] {
+  border-color: var(--danger);
+  background: #fffafa;
+}
+
+.erro {
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.contador {
+  justify-self: end;
+  color: var(--ink-faint);
+  font-size: var(--text-sm);
+  margin-top: -0.25rem;
+}
+
+.agendar {
+  background: var(--teal);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-control);
+  padding: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.agendar:hover:not(:disabled) {
+  background: var(--teal-strong);
+}
+
+.agendar:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.confirmacao:empty {
+  display: none;
+}
+
+.confirmacao {
+  background: var(--ok-wash);
+  color: var(--ok);
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-control);
+}
+
+@media (max-width: 30rem) {
+  .linha {
+    grid-template-columns: 1fr;
+  }
+}

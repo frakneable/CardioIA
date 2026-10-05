@@ -1,0 +1,53 @@
+.caixa {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-panel);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.pulso {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulsar 1s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+  50% {
+    transform: scale(1.6);
+    opacity: 0.4;
+  }
+}
+
+.erro {
+  background: var(--danger-wash);
+  border-color: #efc4ca;
+  color: var(--danger);
+  justify-content: space-between;
+}
+
+.botao {
+  background: var(--paper);
+  border: 1px solid currentColor;
+  color: var(--danger);
+  border-radius: var(--radius-control);
+  padding: 0.375rem 0.875rem;
+  cursor: pointer;
+}
+
+.vazio {
+  flex-direction: column;
+  align-items: flex-start;
+  border-style: dashed;
+}
+
+.titulo {
+  color: var(--ink);
+  font-weight: 700;
+}

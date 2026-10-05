@@ -1,0 +1,38 @@
+.tracado {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.linha {
+  fill: none;
+  stroke: var(--trace);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Entrada: o primeiro traçado é "escrito" uma vez, da esquerda para a
+   direita. pathLength="1" faz o comprimento total valer 1. Depois disso a
+   varredura em loop é controlada pelo componente (requestAnimationFrame). */
+.entrada {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: escrever 2.6s cubic-bezier(0.45, 0.05, 0.35, 1) 0.2s forwards;
+}
+
+@keyframes escrever {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Quem pediu menos movimento ao sistema vê o traçado completo e parado
+   (o componente também não inicia a varredura nesse caso) */
+@media (prefers-reduced-motion: reduce) {
+  .entrada {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

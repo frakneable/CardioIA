@@ -11,3 +11,6 @@ fase2/ROTEIRO_VIDEO.md
 .pytest_cache/
 fase2/GUIA_APRESENTACAO.md
 fase2/ir_alem_2/ROTEIRO_VIDEO.md
+node_modules/
+dist/
+fase2/ir_alem_1/ROTEIRO_VIDEO.md

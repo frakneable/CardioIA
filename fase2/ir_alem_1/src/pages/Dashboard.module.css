@@ -1,0 +1,249 @@
+.pagina {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.cabecalho h1 {
+  font-size: var(--text-2xl);
+}
+
+.data {
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+/* O "monitor": traçado e leituras sobre papel milimetrado de ECG */
+.monitor {
+  border-radius: var(--radius-panel);
+  border: 1px solid var(--grid-major);
+  background-color: #fff8f7;
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+  overflow: hidden;
+}
+
+.tracado {
+  padding: 1.5rem 0 0.5rem;
+}
+
+.leituras {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: rgb(255 255 255 / 0.88);
+  border-top: 1px solid var(--grid-major);
+}
+
+.leitura {
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.leitura + .leitura {
+  border-left: 1px solid var(--grid-major);
+}
+
+.leitura dt {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.leitura dd {
+  margin: 0;
+  font-family: var(--font-readout);
+  font-weight: 600;
+  font-size: 3.5rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin-top: 0.375rem;
+}
+
+.unidade {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.colunas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.bloco {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.blocoTopo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.blocoTopo h2 {
+  font-size: var(--text-lg);
+}
+
+.blocoTopo a {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.agenda {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.agenda li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.quando {
+  display: grid;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.hora {
+  font-family: var(--font-readout);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.paciente {
+  display: block;
+  font-weight: 700;
+}
+
+.tipo {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.centros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.centroLinha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+  font-size: var(--text-sm);
+}
+
+.centroNum {
+  font-family: var(--font-readout);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Barras na mesma escala (total de pacientes), para comparar os centros entre si */
+.barra {
+  display: flex;
+  height: 0.75rem;
+  background: var(--surface);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barraDoenca {
+  background: var(--ink);
+}
+
+.barraSem {
+  background: #9cc9c6;
+}
+
+.legenda {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.375rem 1.25rem;
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.chaveDoenca,
+.chaveSem {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+}
+
+.chaveSem {
+  background: #9cc9c6;
+}
+
+.chaveDoenca {
+  background: var(--ink);
+}
+
+@media (max-width: 64rem) {
+  .colunas {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40rem) {
+  .leituras {
+    grid-template-columns: 1fr;
+  }
+
+  .leitura + .leitura {
+    border-left: none;
+    border-top: 1px solid var(--grid-major);
+  }
+
+  .leitura {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .leitura dd {
+    font-size: 2.5rem;
+    margin-top: 0;
+  }
+}

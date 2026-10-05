@@ -1,0 +1,26 @@
+.pagina {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.pagina h1 {
+  font-size: var(--text-2xl);
+}
+
+.sub {
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+.colunas {
+  display: grid;
+  grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 64rem) {
+  .colunas {
+    grid-template-columns: 1fr;
+  }
+}

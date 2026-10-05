@@ -23,6 +23,7 @@ diagnósticos e classifica o risco para priorizar a triagem.
 | 2 | Base de 200 frases rotuladas (alto/baixo risco) | [`parte2/frases_risco.csv`](parte2/frases_risco.csv) |
 | 2 | Frases adversariais para testar distorções | [`parte2/frases_adversariais.csv`](parte2/frases_adversariais.csv) |
 | 2 | Notebook com TF-IDF, classificação e avaliação | [`parte2/classificador_risco.ipynb`](parte2/classificador_risco.ipynb) |
+| Ir Além 1 | Portal React + Vite: login simulado com JWT, pacientes, agendamentos e painel | [`ir_alem_1/`](ir_alem_1/README.md) |
 | Ir Além 2 | Rede neural MLP (Keras) que classifica imagens de ECG em normal/anormal | [`ir_alem_2/`](ir_alem_2/README.md) |
 
 ## 🗂️ Estrutura
@@ -31,6 +32,7 @@ diagnósticos e classifica o risco para priorizar a triagem.
 fase2/
 ├── parte1/      # frases, mapa de conhecimento, extrator e resultados
 ├── parte2/      # base rotulada, frases adversariais e notebook do classificador
+├── ir_alem_1/   # portal React + Vite (CardioIA Portal), com README próprio
 ├── ir_alem_2/   # MLP para imagens de ECG: notebook, exemplos de imagens e README próprio
 └── tests/       # validação automatizada dos artefatos
 ```
@@ -170,6 +172,17 @@ A seção 8 do notebook detalha cada distorção e propõe mitigações: marcaç
 negação, normalização de sinônimos com o mapa da Parte 1, regras de bandeira
 vermelha acima do modelo, ajuste de limiar, dados mais diversos e humano no
 circuito.
+
+---
+
+## Ir Além 1 — CardioIA Portal (React + Vite)
+
+Interface web com autenticação simulada (Context API e JWT falso no
+`localStorage`), rotas protegidas, listagem de 120 pacientes com dados
+clínicos reais da Fase 1 e nomes fictícios, agendamento de consultas com
+`useState` e `useReducer`, e um painel com indicadores. Estilizado com CSS
+Modules e responsivo. Instalação, requisitos atendidos e vídeo próprio estão
+em [`ir_alem_1/README.md`](ir_alem_1/README.md).
 
 ---
 

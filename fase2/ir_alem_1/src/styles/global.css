@@ -1,0 +1,102 @@
+/* Tokens do CardioIA Portal.
+   Paleta clínica e fria; o vermelho do traçado (--trace) é exclusivo do ECG,
+   para que o único elemento vermelho da tela seja o sinal do coração. */
+:root {
+  --ink: #17323f;          /* texto e navegação: azul-ardósia profundo */
+  --ink-soft: #4b6470;     /* texto secundário */
+  --ink-faint: #7c929b;    /* placeholders, metadados */
+  --paper: #ffffff;
+  --surface: #f2f5f6;      /* fundo da aplicação */
+  --line: #d8e1e4;         /* bordas e divisórias */
+  --teal: #0e6e6b;         /* ação principal: verde-azulado de jaleco */
+  --teal-strong: #0a5552;
+  --teal-wash: #e3f1f0;
+  --trace: #e5484d;        /* traçado do ECG */
+  --grid-minor: #f7dcd9;   /* papel milimetrado: linha de 1 mm */
+  --grid-major: #efbdb7;   /*                    linha de 5 mm */
+  --danger: #9f1d2c;
+  --danger-wash: #fbeaec;
+  --ok: #1f7a4d;
+  --ok-wash: #e4f3eb;
+
+  --font-ui: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-readout: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.125rem;
+
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --focus: 0 0 0 3px #ffffff, 0 0 0 5px var(--teal);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--teal);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--radius-control);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

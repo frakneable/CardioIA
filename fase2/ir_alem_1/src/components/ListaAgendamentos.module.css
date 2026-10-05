@@ -1,0 +1,140 @@
+.lista {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.titulo {
+  font-size: var(--text-lg);
+}
+
+.abas {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+
+.aba {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.875rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Sublinhado desenhado por dentro da aba: não ultrapassa o container */
+.aba[aria-selected='true'] {
+  color: var(--ink);
+  box-shadow: inset 0 -3px 0 var(--teal);
+}
+
+.qtd {
+  font-family: var(--font-readout);
+  font-weight: 600;
+  margin-left: 0.25rem;
+  color: var(--ink-faint);
+}
+
+.itens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.25rem;
+}
+
+.item + .item {
+  border-top: 1px solid var(--line);
+}
+
+.quando {
+  display: grid;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.hora {
+  font-family: var(--font-readout);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.paciente {
+  font-weight: 700;
+}
+
+.tipo {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}
+
+.obs {
+  margin-top: 0.375rem;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+.cancelar,
+.manter,
+.confirmar {
+  border-radius: var(--radius-control);
+  padding: 0.375rem 0.75rem;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.cancelar,
+.manter {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.cancelar:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.confirmar {
+  background: var(--danger);
+  border: 1px solid var(--danger);
+  color: #ffffff;
+}
+
+@media (max-width: 36rem) {
+  .item {
+    grid-template-columns: 6.25rem minmax(0, 1fr);
+  }
+
+  .aba {
+    padding: 0.5rem 0.625rem;
+  }
+
+  .acoes {
+    grid-column: 1 / -1;
+    justify-content: start;
+  }
+}
