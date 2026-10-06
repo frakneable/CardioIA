@@ -18,6 +18,14 @@ const USUARIOS_DEMO = [
 
 export const CREDENCIAIS_DEMO = USUARIOS_DEMO.map(({ email, senha, papel }) => ({ email, senha, papel }))
 
+// Perfis que podem ver a tabela de pacientes com dados clínicos. A recepção
+// só agenda consultas: pressão, colesterol e diagnóstico não são da conta dela.
+export const PAPEIS_DADOS_CLINICOS = ['Cardiologista']
+
+export function podeAcessar(usuario, papeis) {
+  return !papeis || papeis.includes(usuario?.papel)
+}
+
 function paraBase64Url(objeto) {
   // TextEncoder garante que acentos ("Albuquerque", "Recepção") sejam codificados corretamente
   const bytes = new TextEncoder().encode(JSON.stringify(objeto))

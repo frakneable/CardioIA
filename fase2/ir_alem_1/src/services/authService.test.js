@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { criarTokenFalso, lerToken, login } from './authService'
+import { PAPEIS_DADOS_CLINICOS, criarTokenFalso, lerToken, login, podeAcessar } from './authService'
 
 const usuario = { email: 'medico@cardioia.com', nome: 'Dra. Marina Albuquerque', papel: 'Cardiologista' }
 
@@ -21,6 +21,12 @@ describe('JWT simulado', () => {
     expect(lerToken(null)).toBeNull()
     expect(lerToken('abc')).toBeNull()
     expect(lerToken('a.b.c')).toBeNull()
+  })
+
+  it('só o cardiologista acessa os dados clínicos', () => {
+    expect(podeAcessar(usuario, PAPEIS_DADOS_CLINICOS)).toBe(true)
+    expect(podeAcessar({ ...usuario, papel: 'Recepção' }, PAPEIS_DADOS_CLINICOS)).toBe(false)
+    expect(podeAcessar({ ...usuario, papel: 'Recepção' }, undefined)).toBe(true)
   })
 
   it('login aceita a conta de demonstração e recusa senha errada', async () => {

@@ -8,6 +8,7 @@ import Agendamentos from './pages/Agendamentos'
 import NaoEncontrada from './pages/NaoEncontrada'
 import { PacientesProvider } from './contexts/PacientesContext'
 import { AgendamentosProvider } from './contexts/AgendamentosContext'
+import { PAPEIS_DADOS_CLINICOS } from './services/authService'
 
 export default function App() {
   return (
@@ -28,7 +29,14 @@ export default function App() {
       >
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/pacientes" element={<Pacientes />} />
+        <Route
+          path="/pacientes"
+          element={
+            <RotaProtegida papeis={PAPEIS_DADOS_CLINICOS}>
+              <Pacientes />
+            </RotaProtegida>
+          }
+        />
         <Route path="/agendamentos" element={<Agendamentos />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>

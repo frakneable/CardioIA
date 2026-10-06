@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { PAPEIS_DADOS_CLINICOS, podeAcessar } from '../services/authService'
 import Marca from './Marca'
 import styles from './Layout.module.css'
 
 const LINKS = [
   { para: '/dashboard', rotulo: 'Painel' },
-  { para: '/pacientes', rotulo: 'Pacientes' },
+  { para: '/pacientes', rotulo: 'Pacientes', papeis: PAPEIS_DADOS_CLINICOS },
   { para: '/agendamentos', rotulo: 'Consultas' },
 ]
 
@@ -41,7 +42,7 @@ export default function Layout() {
         <div id="navegacao" className={`${styles.gaveta} ${menuAberto ? styles.aberta : ''}`}>
           <nav aria-label="Principal">
             <ul className={styles.links}>
-              {LINKS.map(({ para, rotulo }) => (
+              {LINKS.filter(({ papeis }) => podeAcessar(usuario, papeis)).map(({ para, rotulo }) => (
                 <li key={para}>
                   <NavLink
                     to={para}
