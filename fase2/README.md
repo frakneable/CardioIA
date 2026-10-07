@@ -10,7 +10,7 @@ diagnósticos e classifica o risco para priorizar a triagem.
 
 ## 🎬 Vídeo de demonstração
 
-**YouTube (não listado):** _link a incluir após a gravação_
+**YouTube (não listado):** https://www.youtube.com/watch?v=8BQs41V8JHo
 
 ## 📌 O que está entregue
 
