@@ -70,6 +70,11 @@ scripts/           # gerar_pacientes.py: cria o JSON a partir da base da Fase 1
 - `components/RotaProtegida.jsx` lê `useAuth()`. Sem usuário, redireciona para
   `/login` **guardando a página pedida**: depois do login, o usuário volta
   para onde queria ir.
+- **Controle por perfil:** a tabela de pacientes, com dados clínicos, é só do
+  **Cardiologista**. Para a **Recepção** o link some do menu, e quem digita
+  `/pacientes` volta para o painel. A recepção continua agendando consultas,
+  escolhendo o paciente só pelo nome. A regra está em `PAPEIS_DADOS_CLINICOS`
+  (`services/authService.js`), e a `RotaProtegida` aceita a lista de perfis.
 - Os dados de pacientes e consultas só são carregados **depois** da
   autenticação, porque os providers ficam dentro da rota protegida
   (`App.jsx`).

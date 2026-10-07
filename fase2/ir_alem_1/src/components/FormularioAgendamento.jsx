@@ -76,7 +76,7 @@ export default function FormularioAgendamento({ pacienteInicial = '' }) {
         <select {...props('pacienteId')}>
           <option value="">Escolha o paciente</option>
           {pacientesOrdenados.map((p) => (
-            <option key={p.id} value={p.id}>{p.nome}, {p.idade} anos</option>
+            <option key={p.id} value={p.id}>{p.nome}</option>
           ))}
         </select>
         {mensagemErro('pacienteId')}
