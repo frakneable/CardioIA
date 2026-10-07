@@ -11,7 +11,7 @@ login gera um JWT simulado no navegador.
 
 ## 🎬 Vídeo de demonstração
 
-**YouTube (não listado):** _link a incluir após a gravação_
+**YouTube (não listado):** https://www.youtube.com/watch?v=QpTnxGWJkwE
 
 ## ⚙️ Instalação e execução
 
