@@ -8,9 +8,15 @@ diagnósticos e classifica o risco para priorizar a triagem.
 - Victor Copque dos Reis — RM566821
 - Victor Hugo Ferreira Rolim — RM568006
 
-## 🎬 Vídeo de demonstração
+## 🎬 Vídeos de demonstração
 
-**YouTube (não listado):** https://www.youtube.com/watch?v=8BQs41V8JHo
+Todos no YouTube como não listados.
+
+| Entrega | Vídeo |
+|---|---|
+| Fase 2 — Partes 1 e 2 (diagnóstico por sintomas e classificador de risco) | https://www.youtube.com/watch?v=8BQs41V8JHo |
+| Ir Além 1 — Portal React + Vite | https://www.youtube.com/watch?v=QpTnxGWJkwE |
+| Ir Além 2 — Diagnóstico de ECG com MLP | https://www.youtube.com/watch?v=0CCFFL9NPmQ |
 
 ## 📌 O que está entregue
 
