@@ -2,6 +2,7 @@
 
 > **Fases do projeto:** Fase 1 (este documento) ·
 > [Fase 2 — Diagnóstico Automatizado](fase2/README.md)
+> · [🎬 vídeo da Fase 2](https://www.youtube.com/watch?v=8BQs41V8JHo)
 
 Projeto acadêmico FIAP. Esta fase levanta, organiza e documenta as três bases de
 dados que alimentarão os módulos de Machine Learning, NLP, Visão Computacional e

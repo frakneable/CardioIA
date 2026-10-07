@@ -10,7 +10,7 @@ que classifica **imagens de batimentos cardíacos** como **normal** ou
 
 ## 🎬 Vídeo de demonstração
 
-**YouTube (não listado):** _link a incluir após a gravação_
+**YouTube (não listado):** https://www.youtube.com/watch?v=0CCFFL9NPmQ
 
 ## 📌 Arquivos
 
