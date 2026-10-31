@@ -36,6 +36,8 @@ enche, as leituras com alerta são todas mantidas e metade das normais é
 descartada, para não perder justamente o episódio clínico. Detalhes no
 [relatório](parte1/RELATORIO.md).
 
+![Circuito da Parte 1 no Wokwi: ESP32 com DHT22, potenciômetro (pulso), MPU6050, chave de Wi-Fi e LEDs online/alerta](parte1/circuito.png)
+
 ### O circuito explicado bem simples
 
 Pense no circuito como **um relógio inteligente de hospital** que fica no
@@ -128,9 +130,6 @@ em menos de 1 minuto.
 > sem perder os momentos de perigo.
 
 ### Como rodar no Wokwi
-
-O projeto já está montado e salvo em
-**https://wokwi.com/projects/479413654575407105**. Para recriar do zero:
 
 1. Em [wokwi.com](https://wokwi.com), crie um projeto **ESP32** novo.
 2. Substitua o conteúdo de `sketch.ino` e `diagram.json` pelos desta pasta.
