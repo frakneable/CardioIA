@@ -145,6 +145,38 @@ O projeto já está montado e salvo em
    - **MPU6050:** clique nele e altere a aceleração (acima de 2,5 g simula
      uma queda).
 
+### Roteiro de demonstração: como mexer em cada sensor
+
+O ESP32 só **lê** os sensores; quem muda o "mundo real" na simulação é você,
+mexendo nas peças. O circuito começa numa situação **sem alerta**: 74 BPM,
+36,6 °C e paciente em repouso. Para cada situação, ajuste as peças assim e
+acompanhe o resultado no Monitor Serial e no LED vermelho:
+
+| Situação | Potenciômetro (BPM) | DHT22 (clique na peça) | MPU6050 (clique na peça) | Resultado esperado |
+|---|---|---|---|---|
+| **Normal** (estado inicial) | ~26% do giro → ~74 BPM | 36,6 °C | aceleração Z = 1 g, X e Y = 0 | sem alerta, LED vermelho apagado |
+| **Taquicardia em repouso** | ~80% do giro → ~165 BPM | 36,6 °C | Z = 1 g | `ALERTA: taquicardia` |
+| **Febre** | ~74 BPM | **38,6 °C** | Z = 1 g | `ALERTA: febre` |
+| **Correndo: FC alta sem alarme** | ~65% do giro → ~140 BPM | 36,6 °C | **Z = 1,5 g** (atividade) | **sem alerta**: em atividade o limite sobe para 150 BPM |
+| **Mesma FC, deitado** | ~140 BPM | 36,6 °C | volte Z para 1 g | `ALERTA: taquicardia`, mostrando que o contexto muda a decisão |
+| **Bradicardia** | ~6% do giro → ~40 BPM | 36,6 °C | Z = 1 g | `ALERTA: bradicardia` |
+| **Queda** | ~74 BPM | 36,6 °C | **Z = 3 g** (impacto) | `ALERTA: queda` |
+
+O BPM aparece em cada linha `[LEITURA]`, então é só girar o potenciômetro
+até o número desejado. Para voltar ao normal, desfaça os ajustes da tabela.
+
+**Sequência sugerida para o vídeo:**
+1. Com o Wi-Fi **desligado**, mostre algumas leituras normais sendo gravadas
+   no SPIFFS (`[OFFLINE] ... no buffer`).
+2. Gire o potenciômetro até ~165 BPM: o LED vermelho acende e aparece
+   `ALERTA: taquicardia`. Volte para ~74 BPM.
+3. Deixe o buffer chegar a 20 registros e mostre a compactação
+   (`[EDGE] Decimação ... alertas preservados`).
+4. Ligue o Wi-Fi na chave: tudo é enviado com `[NUVEM]`, os alertas
+   continuam lá, e o arquivo local é apagado.
+5. (Opcional) Mostre o caso "correndo × deitado" para explicar o
+   processamento com contexto no Edge.
+
 O modo demonstração (`MODO_DEMO true`) faz uma leitura a cada 2 s e usa um
 buffer de 20 registros, para a compactação aparecer rápido. Com `false`, o
 código usa os parâmetros de produção (10 s e 8.640 registros).
