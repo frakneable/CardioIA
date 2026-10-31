@@ -1,0 +1,4 @@
+# Bibliotecas do projeto no Wokwi (aba Library Manager)
+DHT sensor library
+Adafruit MPU6050
+Adafruit Unified Sensor
