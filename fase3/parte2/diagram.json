@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "author": "CardioIA — Victor Copque dos Reis e Victor Hugo Ferreira Rolim",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -124.5,
+      "left": -130.2,
+      "attrs": {
+        "temperature": "36.6",
+        "humidity": "55"
+      }
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu1",
+      "top": 196.7,
+      "left": 162.4,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "sw1",
+      "top": -91.6,
+      "left": 156.7,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -61.2,
+      "left": 263,
+      "attrs": {
+        "color": "green",
+        "label": "online"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -61.2,
+      "left": 311,
+      "attrs": {
+        "color": "red",
+        "label": "alerta"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 33.6,
+      "left": 258.65,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 33.6,
+      "left": 306.65,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 40,
+      "left": -150,
+      "attrs": {
+        "color": "red",
+        "label": "Pulso",
+        "key": "p"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "dht1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "dht1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "dht1:SDA",
+      "esp:15",
+      "green",
+      []
+    ],
+    [
+      "imu1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "imu1:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "imu1:SDA",
+      "esp:21",
+      "blue",
+      []
+    ],
+    [
+      "imu1:SCL",
+      "esp:22",
+      "violet",
+      []
+    ],
+    [
+      "sw1:1",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "sw1:2",
+      "esp:27",
+      "gold",
+      []
+    ],
+    [
+      "sw1:3",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "esp:2",
+      "r1:1",
+      "green",
+      []
+    ],
+    [
+      "r1:2",
+      "led1:A",
+      "green",
+      []
+    ],
+    [
+      "led1:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:4",
+      "r2:1",
+      "red",
+      []
+    ],
+    [
+      "r2:2",
+      "led2:A",
+      "red",
+      []
+    ],
+    [
+      "led2:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "btn1:1.r",
+      "esp:32",
+      "orange",
+      []
+    ],
+    [
+      "btn1:2.r",
+      "esp:GND.1",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

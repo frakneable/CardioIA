@@ -1,0 +1,516 @@
+[
+  {
+    "id": "cardioia_tab",
+    "type": "tab",
+    "label": "CardioIA - Fase 3 Parte 2",
+    "disabled": false,
+    "info": "Assina os tópicos MQTT do vestível CardioIA (ESP32 no Wokwi) e monta a dashboard em /dashboard."
+  },
+  {
+    "id": "broker_hivemq",
+    "type": "mqtt-broker",
+    "name": "HiveMQ público",
+    "broker": "broker.hivemq.com",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "closeTopic": "",
+    "closePayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
+  },
+  {
+    "id": "ui_base",
+    "type": "ui-base",
+    "name": "CardioIA",
+    "path": "/dashboard",
+    "appIcon": "",
+    "includeClientData": true,
+    "acceptsClientConfig": [
+      "ui-notification",
+      "ui-control"
+    ],
+    "showPathInSidebar": false,
+    "headerContent": "page",
+    "navigationStyle": "none",
+    "titleBarStyle": "default",
+    "showReconnectNotification": true,
+    "notificationDisplayTime": 1,
+    "showDisconnectNotification": true
+  },
+  {
+    "id": "ui_tema",
+    "type": "ui-theme",
+    "name": "CardioIA",
+    "colors": {
+      "surface": "#b42318",
+      "primary": "#b42318",
+      "bgPage": "#f3f4f6",
+      "groupBg": "#ffffff",
+      "groupOutline": "#d0d7de"
+    },
+    "sizes": {
+      "density": "default",
+      "pagePadding": "14px",
+      "groupGap": "14px",
+      "groupBorderRadius": "8px",
+      "widgetGap": "10px"
+    }
+  },
+  {
+    "id": "ui_pagina",
+    "type": "ui-page",
+    "name": "Monitor do paciente 01",
+    "ui": "ui_base",
+    "path": "/monitor",
+    "icon": "heart-pulse",
+    "layout": "grid",
+    "theme": "ui_tema",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": 0,
+        "cols": 3
+      },
+      {
+        "name": "Tablet",
+        "px": 576,
+        "cols": 6
+      },
+      {
+        "name": "Small Desktop",
+        "px": 768,
+        "cols": 9
+      },
+      {
+        "name": "Desktop",
+        "px": 1024,
+        "cols": 12
+      }
+    ],
+    "order": 1,
+    "className": "",
+    "visible": "true",
+    "disabled": "false"
+  },
+  {
+    "id": "g_alerta",
+    "type": "ui-group",
+    "name": "Situação do paciente",
+    "page": "ui_pagina",
+    "width": 9,
+    "height": 1,
+    "order": 1,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_status",
+    "type": "ui-group",
+    "name": "Dispositivo",
+    "page": "ui_pagina",
+    "width": 3,
+    "height": 1,
+    "order": 2,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_bpm",
+    "type": "ui-group",
+    "name": "Batimentos cardíacos",
+    "page": "ui_pagina",
+    "width": 8,
+    "height": 1,
+    "order": 3,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_temp",
+    "type": "ui-group",
+    "name": "Temperatura corporal",
+    "page": "ui_pagina",
+    "width": 4,
+    "height": 1,
+    "order": 4,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_hist",
+    "type": "ui-group",
+    "name": "Temperatura ao longo do tempo",
+    "page": "ui_pagina",
+    "width": 8,
+    "height": 1,
+    "order": 5,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "g_mov",
+    "type": "ui-group",
+    "name": "Movimento (MPU6050)",
+    "page": "ui_pagina",
+    "width": 4,
+    "height": 1,
+    "order": 6,
+    "showTitle": true,
+    "className": "",
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "in_vitais",
+    "type": "mqtt in",
+    "z": "cardioia_tab",
+    "name": "vitais",
+    "topic": "cardioia/fiap-rm566821/paciente01/vitais",
+    "qos": "0",
+    "datatype": "json",
+    "broker": "broker_hivemq",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 150,
+    "y": 120,
+    "wires": [
+      [
+        "f_separa"
+      ]
+    ]
+  },
+  {
+    "id": "in_alerta",
+    "type": "mqtt in",
+    "z": "cardioia_tab",
+    "name": "alerta (retained)",
+    "topic": "cardioia/fiap-rm566821/paciente01/alerta",
+    "qos": "0",
+    "datatype": "json",
+    "broker": "broker_hivemq",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 170,
+    "y": 260,
+    "wires": [
+      [
+        "tpl_alerta"
+      ]
+    ]
+  },
+  {
+    "id": "in_status",
+    "type": "mqtt in",
+    "z": "cardioia_tab",
+    "name": "status (LWT)",
+    "topic": "cardioia/fiap-rm566821/paciente01/status",
+    "qos": "0",
+    "datatype": "utf8",
+    "broker": "broker_hivemq",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 160,
+    "y": 320,
+    "wires": [
+      [
+        "tpl_status"
+      ]
+    ]
+  },
+  {
+    "id": "f_separa",
+    "type": "function",
+    "z": "cardioia_tab",
+    "name": "Separa sinais",
+    "func": "// Recebe uma leitura do ESP32 e distribui para os widgets.\n// ts vem em segundos (NTP); 0 = ESP32 ainda sem horário -> usa o de chegada.\nconst v = msg.payload;\nconst quando = v.ts > 1700000000 ? v.ts * 1000 : Date.now();\n\n// Descarta repetidos (o ESP32 pode reenviar a fila após reiniciar)\nconst vistos = context.get('vistos') || [];\nconst chave = `${v.ts}-${v.seq}`;\nif (vistos.includes(chave)) return null;\nvistos.push(chave);\ncontext.set('vistos', vistos.slice(-200));\n\nconst bpm = v.bpm > 0\n    ? [{ topic: 'BPM', payload: { x: quando, y: v.bpm } },\n       { topic: 'Limite em repouso (120)', payload: { x: quando, y: 120 } }]\n    : null;   // sem leitura de pulso: não desenha ponto\nconst temperatura = { topic: 'Temperatura (°C)', payload: { x: quando, y: v.temp } };\nconst gauge = { payload: v.temp };\nconst alerta = { payload: { ativo: v.alerta === 1, motivo: v.motivo, bpm: v.bpm, temp: v.temp, ts: quando / 1000 } };\nconst hora = new Date(quando).toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' });\nconst movimento = { payload: `${v.mov} (${v.acel.toFixed(2)} g) · leitura #${v.seq} às ${hora}` };\n\nreturn [bpm, temperatura, gauge, alerta, movimento];",
+    "outputs": 5,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 370,
+    "y": 120,
+    "wires": [
+      [
+        "ch_bpm"
+      ],
+      [
+        "ch_temp"
+      ],
+      [
+        "gauge_temp"
+      ],
+      [
+        "tpl_alerta"
+      ],
+      [
+        "txt_mov"
+      ]
+    ],
+    "outputLabels": [
+      "gráfico BPM",
+      "gráfico temperatura",
+      "gauge",
+      "alerta",
+      "movimento"
+    ]
+  },
+  {
+    "id": "ch_bpm",
+    "type": "ui-chart",
+    "z": "cardioia_tab",
+    "group": "g_bpm",
+    "name": "Gráfico BPM",
+    "label": "BPM (pulso)",
+    "order": 1,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "x",
+    "xAxisPropertyType": "property",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "HH:mm:ss",
+    "xmin": "",
+    "xmax": "",
+    "yAxisLabel": "BPM",
+    "yAxisProperty": "y",
+    "yAxisPropertyType": "property",
+    "ymin": "30",
+    "ymax": "200",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 3,
+    "showLegend": true,
+    "removeOlder": 5,
+    "removeOlderUnit": "60",
+    "removeOlderPoints": "",
+    "colors": [
+      "#b42318",
+      "#9ca3af"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": 0,
+    "height": 5,
+    "className": "",
+    "interpolation": "linear",
+    "x": 640,
+    "y": 60,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ch_temp",
+    "type": "ui-chart",
+    "z": "cardioia_tab",
+    "group": "g_hist",
+    "name": "Gráfico temperatura",
+    "label": "°C",
+    "order": 1,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "x",
+    "xAxisPropertyType": "property",
+    "xAxisType": "time",
+    "xAxisFormat": "",
+    "xAxisFormatType": "HH:mm:ss",
+    "xmin": "",
+    "xmax": "",
+    "yAxisLabel": "°C",
+    "yAxisProperty": "y",
+    "yAxisPropertyType": "property",
+    "ymin": "34",
+    "ymax": "41",
+    "bins": 10,
+    "action": "append",
+    "stackSeries": false,
+    "pointShape": "circle",
+    "pointRadius": 3,
+    "showLegend": true,
+    "removeOlder": 5,
+    "removeOlderUnit": "60",
+    "removeOlderPoints": "",
+    "colors": [
+      "#0969da"
+    ],
+    "textColor": [
+      "#666666"
+    ],
+    "textColorDefault": true,
+    "gridColor": [
+      "#e5e5e5"
+    ],
+    "gridColorDefault": true,
+    "width": 0,
+    "height": 5,
+    "className": "",
+    "interpolation": "linear",
+    "x": 650,
+    "y": 100,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "gauge_temp",
+    "type": "ui-gauge",
+    "z": "cardioia_tab",
+    "name": "Gauge temperatura",
+    "group": "g_temp",
+    "order": 1,
+    "width": 4,
+    "height": 4,
+    "gtype": "gauge-half",
+    "gstyle": "needle",
+    "title": "Temperatura",
+    "units": "°C",
+    "icon": "thermometer",
+    "prefix": "",
+    "suffix": "°C",
+    "segments": [
+      {
+        "from": "34",
+        "color": "#5b9bd5"
+      },
+      {
+        "from": "35",
+        "color": "#1a7f37"
+      },
+      {
+        "from": "37.8",
+        "color": "#f59e0b"
+      },
+      {
+        "from": "39",
+        "color": "#b42318"
+      }
+    ],
+    "min": "34",
+    "max": "41",
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "className": "",
+    "x": 650,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "tpl_alerta",
+    "type": "ui-template",
+    "z": "cardioia_tab",
+    "group": "g_alerta",
+    "page": "",
+    "ui": "",
+    "name": "Indicador de alerta",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n  <div class=\"cardio-alerta\" :class=\"estado\">\n    <span class=\"luz\"></span>\n    <div>\n      <div class=\"titulo\">{{ titulo }}</div>\n      <div class=\"detalhe\">{{ detalhe }}</div>\n    </div>\n  </div>\n</template>\n\n<script>\nexport default {\n  computed: {\n    p () { return this.msg?.payload },\n    estado () { return !this.p ? 'aguardando' : (this.p.ativo ? 'em-alerta' : 'normal') },\n    titulo () {\n      if (!this.p) return 'Aguardando dados do vestível...'\n      return this.p.ativo ? 'ALERTA: ' + this.p.motivo.replaceAll(' ', ' + ') : 'Sinais normais'\n    },\n    detalhe () {\n      if (!this.p) return 'Nenhuma leitura recebida ainda'\n      const bpm = this.p.bpm > 0 ? this.p.bpm + ' BPM' : 'sem leitura de pulso'\n      const hora = this.p.ts ? new Date(this.p.ts * 1000).toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : ''\n      return `${bpm} · ${this.p.temp} °C · ${hora}`\n    }\n  }\n}\n</script>\n\n<style scoped>\n.cardio-alerta { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 8px; color: #fff; font-family: Helvetica, Arial, sans-serif; }\n.cardio-alerta.normal { background: #1a7f37; }\n.cardio-alerta.em-alerta { background: #b42318; }\n.cardio-alerta.aguardando { background: #6e7781; }\n.luz { width: 22px; height: 22px; border-radius: 50%; background: #fff; flex: none; }\n.em-alerta .luz { animation: pisca 0.8s infinite; }\n@keyframes pisca { 50% { opacity: 0.2; } }\n.titulo { font-size: 22px; font-weight: 700; text-transform: none; }\n.detalhe { font-size: 14px; opacity: 0.9; margin-top: 2px; }\n</style>",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 660,
+    "y": 200,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "tpl_status",
+    "type": "ui-template",
+    "z": "cardioia_tab",
+    "group": "g_status",
+    "page": "",
+    "ui": "",
+    "name": "Status do dispositivo",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "head": "",
+    "format": "<template>\n  <div class=\"cardio-status\" :class=\"online ? 'on' : 'off'\">\n    <span class=\"ponto\"></span> Dispositivo {{ online ? 'ONLINE' : 'OFFLINE' }}\n  </div>\n</template>\n\n<script>\nexport default {\n  computed: { online () { return this.msg?.payload === 'online' } }\n}\n</script>\n\n<style scoped>\n.cardio-status { display: flex; align-items: center; gap: 8px; font: 600 16px Helvetica, Arial, sans-serif; }\n.ponto { width: 12px; height: 12px; border-radius: 50%; }\n.on { color: #1a7f37; } .on .ponto { background: #1a7f37; }\n.off { color: #6e7781; } .off .ponto { background: #6e7781; }\n</style>",
+    "storeOutMessages": true,
+    "passthru": false,
+    "resendOnRefresh": true,
+    "templateScope": "local",
+    "className": "",
+    "x": 660,
+    "y": 320,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "txt_mov",
+    "type": "ui-text",
+    "z": "cardioia_tab",
+    "group": "g_mov",
+    "order": 1,
+    "width": 0,
+    "height": 0,
+    "name": "Movimento",
+    "label": "",
+    "format": "{{msg.payload}}",
+    "layout": "row-left",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#1f2328",
+    "wrapText": true,
+    "className": "",
+    "x": 630,
+    "y": 240,
+    "wires": []
+  }
+]

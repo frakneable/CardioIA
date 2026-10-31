@@ -19,6 +19,11 @@ transmite para a nuvem e alimenta dashboards com alertas.
 | 1 | Código C++ comentado (ESP32) | [`parte1/sketch.ino`](parte1/sketch.ino) |
 | 1 | Circuito do Wokwi e tabela de partições (cria a área do SPIFFS) | [`parte1/diagram.json`](parte1/diagram.json) · [`parte1/partitions.csv`](parte1/partitions.csv) |
 | 1 | Relatório: fluxo de funcionamento e lógica de resiliência | [`parte1/RELATORIO.pdf`](parte1/RELATORIO.pdf) · [`parte1/RELATORIO.md`](parte1/RELATORIO.md) |
+| 2 | Projeto no Wokwi (ESP32 publicando por MQTT) | https://wokwi.com/projects/479418030587973633 |
+| 2 | Código do ESP32 com MQTT | [`parte2/sketch.ino`](parte2/sketch.ino) |
+| 2 | Fluxo e dashboard do Node-RED (export) | [`parte2/node-red/flows.json`](parte2/node-red/flows.json) |
+| 2 | Prints da dashboard, do fluxo e do Wokwi | [`parte2/prints/`](parte2/prints/) |
+| 2 | Relatório: fluxo de comunicação MQTT e configuração da dashboard | [`parte2/RELATORIO.pdf`](parte2/RELATORIO.pdf) · [`parte2/RELATORIO.md`](parte2/RELATORIO.md) |
 
 ## Parte 1 — Edge Computing
 
@@ -189,3 +194,26 @@ arduino-cli lib install "DHT sensor library" "Adafruit MPU6050"
 mkdir -p /tmp/cardioia_edge && cp fase3/parte1/sketch.ino /tmp/cardioia_edge/cardioia_edge.ino
 arduino-cli compile --fqbn esp32:esp32:esp32 /tmp/cardioia_edge
 ```
+
+---
+
+## Parte 2 — Transmissão para a nuvem e visualização (Fog/Cloud)
+
+O vestível passa a publicar de verdade por **MQTT** no broker público
+`broker.hivemq.com`, e um **Node-RED** com o Dashboard 2.0 mostra tudo em tempo
+real. O batimento agora vem de um **botão de pulso**: cada aperto é uma batida,
+e o ESP32 calcula o BPM pela média dos intervalos.
+
+![Dashboard em alerta de taquicardia](parte2/prints/02-dashboard-alerta.png)
+
+- **Gráfico** de batimentos com a linha do limite de 120 BPM, e outro de
+  temperatura.
+- **Gauge** de temperatura com faixas de hipotermia, normal, febre e febre alta.
+- **Indicador de alerta**: faixa verde "Sinais normais" ou vermelha
+  "ALERTA: motivo", que pisca.
+- **Status do dispositivo** online/offline, publicado pelo *Last Will* do MQTT.
+- Sem conexão, as leituras ficam na fila do SPIFFS e são reenviadas ao
+  reconectar; o gráfico preenche o buraco no horário certo.
+
+Instruções completas, tópicos e prints: [`parte2/README.md`](parte2/README.md).
+Relatório: [`parte2/RELATORIO.pdf`](parte2/RELATORIO.pdf).

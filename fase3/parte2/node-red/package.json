@@ -1,0 +1,12 @@
+{
+  "name": "cardioia-fase3-node-red",
+  "description": "Node-RED do CardioIA (Fase 3, Parte 2): dashboard de sinais vitais via MQTT",
+  "private": true,
+  "scripts": {
+    "start": "node-red --userDir . --port 1880 flows.json"
+  },
+  "dependencies": {
+    "node-red": "4.0.9",
+    "@flowfuse/node-red-dashboard": "1.22.1"
+  }
+}
