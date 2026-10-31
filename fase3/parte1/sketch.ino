@@ -17,6 +17,24 @@
  *
  * "Nuvem" = Serial.println com prefixo [NUVEM]. Na Parte 2 o envio passa a ser MQTT.
  *
+ * Situações para testar (mexa nas peças com a simulação rodando):
+ *   Situação                Potenciômetro   DHT22     MPU6050 (aceleração Z)  Resultado
+ *   ----------------------  --------------  --------  ----------------------  -----------------------
+ *   Normal (estado inicial) ~26% -> 74 BPM  36,6 °C   1 g                     sem alerta
+ *   Taquicardia em repouso  ~80% -> 165 BPM 36,6 °C   1 g                     ALERTA: taquicardia
+ *   Febre                   ~74 BPM         38,6 °C   1 g                     ALERTA: febre
+ *   Hipotermia              ~74 BPM         34,5 °C   1 g                     ALERTA: hipotermia
+ *   Correndo                ~65% -> 140 BPM 36,6 °C   1,5 g (atividade)       sem alerta (limite 150)
+ *   Mesma FC, deitado       ~140 BPM        36,6 °C   1 g (repouso)           ALERTA: taquicardia
+ *   Bradicardia             ~6%  -> 40 BPM  36,6 °C   1 g                     ALERTA: bradicardia
+ *   Queda                   ~74 BPM         36,6 °C   3 g (impacto)           ALERTA: queda
+ *   Sem conexão             qualquer        qualquer  qualquer                chave Wi-Fi desligada:
+ *                                                                             [OFFLINE] grava no SPIFFS
+ *   Reconexão               qualquer        qualquer  qualquer                chave ligada: [NUVEM] envia
+ *                                                                             tudo e apaga o arquivo
+ *
+ * Para voltar ao normal, desfaça o ajuste. O BPM aparece em cada [LEITURA].
+ *
  * Observação sobre o simulador: o SPIFFS do Wokwi funciona durante a sessão,
  * mas é volátil (some ao reiniciar a simulação). Num ESP32 real o arquivo
  * sobrevive a quedas de energia. O Monitor Serial registra tudo o que foi
@@ -115,9 +133,9 @@ unsigned long contarRegistros() {
   File f = SPIFFS.open(ARQUIVO_BUFFER, FILE_READ);
   if (!f) return 0;
   unsigned long n = 0;
-  f.readStringUntil('\n');                  // pula o cabeçalho
+  lerLinha(f);                  // pula o cabeçalho
   while (f.available()) {
-    if (f.readStringUntil('\n').length() > 0) n++;
+    if (lerLinha(f).length() > 0) n++;
   }
   f.close();
   return n;
@@ -129,6 +147,13 @@ void garantirArquivo() {
   File f = SPIFFS.open(ARQUIVO_BUFFER, FILE_WRITE);
   f.println(CABECALHO_CSV);
   f.close();
+}
+
+// Lê uma linha do arquivo sem o "\r\n" final (println grava os dois).
+String lerLinha(File &f) {
+  String linha = f.readStringUntil('\n');
+  linha.trim();
+  return linha;
 }
 
 // Retorna true se a linha CSV tem alerta=1 (última coluna).
@@ -157,10 +182,10 @@ void compactarBuffer() {
   // Passada 1: decimação das leituras normais
   File origem = SPIFFS.open(ARQUIVO_BUFFER, FILE_READ);
   File destino = SPIFFS.open(ARQUIVO_TEMP, FILE_WRITE);
-  destino.println(origem.readStringUntil('\n'));   // copia o cabeçalho
+  destino.println(lerLinha(origem));   // copia o cabeçalho
   unsigned long mantidos = 0, normais = 0;
   while (origem.available()) {
-    String linha = origem.readStringUntil('\n');
+    String linha = lerLinha(origem);
     if (linha.length() == 0) continue;
     bool manter = linhaTemAlerta(linha) || (normais++ % 2 == 0);
     if (manter) {
@@ -181,10 +206,10 @@ void compactarBuffer() {
     unsigned long descartar = registrosNoBuffer - ALVO_POS_COMPACTACAO;
     origem = SPIFFS.open(ARQUIVO_BUFFER, FILE_READ);
     destino = SPIFFS.open(ARQUIVO_TEMP, FILE_WRITE);
-    destino.println(origem.readStringUntil('\n'));
+    destino.println(lerLinha(origem));
     unsigned long i = 0;
     while (origem.available()) {
-      String linha = origem.readStringUntil('\n');
+      String linha = lerLinha(origem);
       if (linha.length() == 0) continue;
       if (i++ >= descartar) destino.println(linha);
     }
@@ -226,13 +251,13 @@ void sincronizar() {
   digitalWrite(PINO_LED_ONLINE, LOW);   // pisca durante o envio
 
   File origem = SPIFFS.open(ARQUIVO_BUFFER, FILE_READ);
-  String cabecalho = origem.readStringUntil('\n');
+  String cabecalho = lerLinha(origem);
   unsigned long enviados = 0;
   bool interrompido = false;
   File restante;
 
   while (origem.available()) {
-    String linha = origem.readStringUntil('\n');
+    String linha = lerLinha(origem);
     if (linha.length() == 0) continue;
 
     wifiConectado = digitalRead(PINO_WIFI) == HIGH;

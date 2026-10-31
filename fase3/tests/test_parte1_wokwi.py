@@ -46,3 +46,9 @@ def test_relatorio_tem_pelo_menos_uma_pagina():
     assert len(relatorio.split()) >= 500
     for secao in ("Fluxo de funcionamento", "resiliência", "armazenamento limitado"):
         assert secao.lower() in relatorio.lower()
+
+
+def test_tabela_de_particoes_tem_area_para_o_spiffs():
+    linhas = (DIR / "partitions.csv").read_text(encoding="utf-8").splitlines()
+    spiffs = [l.split(",") for l in linhas if l.startswith("spiffs")]
+    assert spiffs and int(spiffs[0][4], 16) >= 1024 * 1024
