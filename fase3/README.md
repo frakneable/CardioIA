@@ -18,7 +18,7 @@ transmite para a nuvem e alimenta dashboards com alertas.
 | 1 | Projeto no Wokwi | https://wokwi.com/projects/479413654575407105 |
 | 1 | Código C++ comentado (ESP32) | [`parte1/sketch.ino`](parte1/sketch.ino) |
 | 1 | Circuito do Wokwi e tabela de partições (cria a área do SPIFFS) | [`parte1/diagram.json`](parte1/diagram.json) · [`parte1/partitions.csv`](parte1/partitions.csv) |
-| 1 | Relatório: fluxo de funcionamento e lógica de resiliência | [`parte1/RELATORIO.md`](parte1/RELATORIO.md) |
+| 1 | Relatório: fluxo de funcionamento e lógica de resiliência | [`parte1/RELATORIO.pdf`](parte1/RELATORIO.pdf) · [`parte1/RELATORIO.md`](parte1/RELATORIO.md) |
 
 ## Parte 1 — Edge Computing
 
