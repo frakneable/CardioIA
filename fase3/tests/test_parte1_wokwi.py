@@ -52,21 +52,3 @@ def test_tabela_de_particoes_tem_area_para_o_spiffs():
     linhas = (DIR / "partitions.csv").read_text(encoding="utf-8").splitlines()
     spiffs = [l.split(",") for l in linhas if l.startswith("spiffs")]
     assert spiffs and int(spiffs[0][4], 16) >= 1024 * 1024
-
-
-def test_botoes_de_cenario_ligados_aos_pinos_do_codigo():
-    assert _ligado("btn1", "1.r", _pino("PINO_BTN_NORMAL"))
-    assert _ligado("btn2", "1.r", _pino("PINO_BTN_ALERTA"))
-    assert "INPUT_PULLUP" in SKETCH
-
-
-def test_perfis_de_cenario_caem_dos_dois_lados_dos_limiares():
-    def const(nome):
-        return float(re.search(rf"{nome}\s*=\s*([\d.]+);", SKETCH).group(1))
-
-    normal = [float(x) for x in re.search(r"PERFIL_NORMAL = \{ ([^}]+) \}", SKETCH).group(1).split(",")]
-    alerta = [float(x) for x in re.search(r"PERFIL_ALERTA = \{ ([^}]+) \}", SKETCH).group(1).split(",")]
-    # bpm e temperatura (com a variação de ±3 BPM e ±0,1 °C do código)
-    assert const("BPM_MIN") <= normal[0] - 3 and normal[0] + 3 <= const("BPM_MAX_REPOUSO")
-    assert const("TEMP_HIPOTERMIA") < normal[1] - 0.1 and normal[1] + 0.1 < const("TEMP_FEBRE")
-    assert alerta[0] - 3 > const("BPM_MAX_ATIVIDADE") and alerta[1] - 0.1 >= const("TEMP_FEBRE")

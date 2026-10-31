@@ -74,15 +74,6 @@ fica sem conexão.
 **🔴 LED vermelho: "ALERTA!"** Acende quando a última leitura foi
 preocupante: coração muito rápido ou muito lento, febre, frio demais ou queda.
 
-**🟢🔴 Botões "Normal" e "Alerta": o controle remoto da demonstração.** Os
-dois botões redondos à esquerda. Em vez de ficar girando o potenciômetro e
-mexendo no termômetro durante o vídeo, um clique troca o paciente inteiro:
-o verde vira "paciente tranquilo" (72 batidas, 36,5 °C) e o vermelho vira
-"paciente passando mal" (165 batidas deitado e febre de 38,6 °C). O cérebro
-continua decidindo sozinho se é alerta, com as mesmas regras de sempre: os
-botões só trocam os números que ele recebe. Clicou de novo no mesmo botão,
-volta a ouvir os sensores de verdade.
-
 **〰️ Resistores: os redutores de velocidade.** As pecinhas listradas abaixo dos
 LEDs. Seguram a corrente para o LED não "queimar" por receber energia demais.
 
@@ -152,15 +143,7 @@ O projeto já está montado e salvo em
    - **potenciômetro:** muda o BPM;
    - **DHT22:** clique nele e altere a temperatura;
    - **MPU6050:** clique nele e altere a aceleração (acima de 2,5 g simula
-     uma queda);
-   - **botão verde "Normal"** (ou tecla **N**): paciente estável, ~72 BPM e
-     36,5 °C, sem alerta;
-   - **botão vermelho "Alerta"** (ou tecla **A**): taquicardia em repouso
-     (~165 BPM) com febre (~38,6 °C);
-   - clicar de novo no botão do cenário ativo volta a usar os sensores.
-
-   O circuito já começa numa situação **sem alerta**: 74 BPM, 36,6 °C e
-   paciente em repouso.
+     uma queda).
 
 O modo demonstração (`MODO_DEMO true`) faz uma leitura a cada 2 s e usa um
 buffer de 20 registros, para a compactação aparecer rápido. Com `false`, o

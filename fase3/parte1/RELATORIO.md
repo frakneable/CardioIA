@@ -18,11 +18,6 @@ Wokwi com três sensores:
 | **MPU6050** (acelerômetro) | aceleração em g | diz se o paciente está em repouso ou em atividade e detecta queda |
 
 Uma chave deslizante faz o papel da variável booleana `wifiConectado`.
-Dois botões ("Normal" e "Alerta", teclas N e A) trocam os valores lidos por
-um perfil pronto (paciente estável, ou taquicardia em repouso com febre). As
-mesmas regras de alerta continuam decidindo o resultado. Assim a demonstração
-alterna entre os dois estados com um clique; um segundo clique volta aos
-sensores.
 O LED verde indica que o dispositivo está online e o vermelho acende quando a
 última leitura gerou alerta.
 
