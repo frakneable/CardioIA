@@ -14,3 +14,12 @@ fase2/ir_alem_2/ROTEIRO_VIDEO.md
 node_modules/
 dist/
 fase2/ir_alem_1/ROTEIRO_VIDEO.md
+
+# Node-RED (fase3/parte2): só flows.json e package*.json vão para o git
+fase3/parte2/node-red/.config.*
+fase3/parte2/node-red/*.backup
+fase3/parte2/node-red/.flows.json.backup
+fase3/parte2/node-red/flows_cred.json
+fase3/parte2/node-red/settings.js
+fase3/parte2/node-red/lib/
+fase3/parte2/node-red/context/
