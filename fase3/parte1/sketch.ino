@@ -14,6 +14,9 @@
  *   - Chave deslizante: simula o Wi-Fi (variável booleana wifiConectado) -> GPIO 27
  *   - LED verde: online / sincronizando                                 -> GPIO 2
  *   - LED vermelho: alerta clínico na última leitura                    -> GPIO 4
+ *   - Botão verde "Normal" (tecla N): simula um paciente estável         -> GPIO 32
+ *   - Botão vermelho "Alerta" (tecla A): simula taquicardia com febre    -> GPIO 33
+ *     Apertar de novo o botão do cenário ativo volta a usar os sensores.
  *
  * "Nuvem" = Serial.println com prefixo [NUVEM]. Na Parte 2 o envio passa a ser MQTT.
  *
@@ -39,6 +42,8 @@
 #define PINO_WIFI       27
 #define PINO_LED_ONLINE 2
 #define PINO_LED_ALERTA 4
+#define PINO_BTN_NORMAL 32
+#define PINO_BTN_ALERTA 33
 
 // ---------------------------------------------------------------------------
 // Modelo de armazenamento
@@ -80,6 +85,26 @@ const float ACEL_DESVIO_ATIVO_G = 0.3;   // |a| longe de 1 g = paciente se moven
 const float ACEL_QUEDA_G        = 2.5;   // pico de impacto típico de queda
 
 // ---------------------------------------------------------------------------
+// Cenários de demonstração (botões)
+// ---------------------------------------------------------------------------
+// Os botões não mexem nas peças do Wokwi: eles substituem os valores lidos
+// por um perfil pronto, e as MESMAS regras de alerta decidem o resultado.
+// Assim dá para alternar entre "paciente estável" e "paciente em crise" com
+// um clique, sem girar potenciômetro nem editar o DHT22 durante o vídeo.
+enum Cenario { CENARIO_SENSORES, CENARIO_NORMAL, CENARIO_ALERTA };
+const char *NOMES_CENARIO[] = { "sensores", "NORMAL simulado", "ALERTA simulado" };
+
+struct Perfil {
+  int bpm;
+  float temperatura;
+  float umidade;
+  float acelG;
+};
+const Perfil PERFIL_NORMAL = { 72, 36.5, 50.0, 1.00 };   // repouso, sinais estáveis
+const Perfil PERFIL_ALERTA = { 165, 38.6, 78.0, 1.00 };  // taquicardia em repouso + febre + suor
+const unsigned long DEBOUNCE_MS = 200;
+
+// ---------------------------------------------------------------------------
 // Estado global
 // ---------------------------------------------------------------------------
 DHT dht(PINO_DHT, DHT22);
@@ -92,6 +117,11 @@ bool wifiAnterior  = false;
 unsigned long seq = 0;             // número de série da leitura: a nuvem usa para deduplicar
 unsigned long registrosNoBuffer = 0;
 unsigned long ultimaLeitura = 0;
+
+Cenario cenario = CENARIO_SENSORES;
+bool btnNormalAnterior = HIGH;      // INPUT_PULLUP: solto = HIGH, apertado = LOW
+bool btnAlertaAnterior = HIGH;
+unsigned long ultimoClique = 0;
 
 struct Leitura {
   unsigned long seq;
@@ -301,6 +331,16 @@ Leitura lerSensores() {
                    a.acceleration.y * a.acceleration.y +
                    a.acceleration.z * a.acceleration.z) / SENSORS_GRAVITY_STANDARD;
   }
+
+  // Cenário escolhido nos botões: troca os valores lidos pelo perfil, com uma
+  // pequena variação para a série não ficar artificialmente reta.
+  if (cenario != CENARIO_SENSORES) {
+    const Perfil &p = cenario == CENARIO_NORMAL ? PERFIL_NORMAL : PERFIL_ALERTA;
+    l.bpm = p.bpm + random(-3, 4);
+    l.temperatura = p.temperatura + random(-1, 2) / 10.0;
+    l.umidade = p.umidade + random(-2, 3);
+    l.acelG = p.acelG;
+  }
   if (l.acelG >= ACEL_QUEDA_G)                         l.movimento = "queda";
   else if (fabs(l.acelG - 1.0) > ACEL_DESVIO_ATIVO_G)  l.movimento = "atividade";
   else                                                 l.movimento = "repouso";
@@ -322,9 +362,30 @@ Leitura lerSensores() {
 }
 
 void imprimirLeitura(const Leitura &l) {
-  Serial.printf("[LEITURA #%lu] %.1f C | %.1f %% | %d BPM | %.2f g (%s)%s%s\n",
+  Serial.printf("[LEITURA #%lu] %.1f C | %.1f %% | %d BPM | %.2f g (%s)%s%s%s%s\n",
                 l.seq, l.temperatura, l.umidade, l.bpm, l.acelG, l.movimento,
+                cenario != CENARIO_SENSORES ? " | " : "",
+                cenario != CENARIO_SENSORES ? NOMES_CENARIO[cenario] : "",
                 l.alerta ? " | ALERTA: " : "", l.motivo.c_str());
+}
+
+// Lê os botões de cenário. Detecta só a borda de descida (o momento do
+// clique), com debounce, para um aperto não contar várias vezes.
+void lerBotoes() {
+  bool normal = digitalRead(PINO_BTN_NORMAL);
+  bool alerta = digitalRead(PINO_BTN_ALERTA);
+  bool clicouNormal = btnNormalAnterior == HIGH && normal == LOW;
+  bool clicouAlerta = btnAlertaAnterior == HIGH && alerta == LOW;
+  btnNormalAnterior = normal;
+  btnAlertaAnterior = alerta;
+
+  if (!(clicouNormal || clicouAlerta) || millis() - ultimoClique < DEBOUNCE_MS) return;
+  ultimoClique = millis();
+
+  Cenario escolhido = clicouNormal ? CENARIO_NORMAL : CENARIO_ALERTA;
+  cenario = cenario == escolhido ? CENARIO_SENSORES : escolhido;  // 2º clique desliga
+  Serial.printf("[CENARIO] Agora usando: %s\n", NOMES_CENARIO[cenario]);
+  ultimaLeitura = 0;   // faz uma leitura na hora, para o efeito aparecer já
 }
 
 // ---------------------------------------------------------------------------
@@ -336,6 +397,9 @@ void setup() {
   pinMode(PINO_WIFI, INPUT);
   pinMode(PINO_LED_ONLINE, OUTPUT);
   pinMode(PINO_LED_ALERTA, OUTPUT);
+  pinMode(PINO_BTN_NORMAL, INPUT_PULLUP);
+  pinMode(PINO_BTN_ALERTA, INPUT_PULLUP);
+  randomSeed(analogRead(PINO_PULSO));
 
   dht.begin();
   Wire.begin(21, 22);
@@ -357,6 +421,7 @@ void setup() {
   Serial.printf("MPU6050: %s | pendentes no boot: %lu\n",
                 mpuDisponivel ? "ok" : "não encontrado", registrosNoBuffer);
   Serial.println("Use a chave deslizante para ligar/desligar o Wi-Fi.");
+  Serial.println("Botões: Normal (tecla N) e Alerta (tecla A). Clique de novo para voltar aos sensores.");
   Serial.println(CABECALHO_CSV);
 }
 
@@ -368,6 +433,8 @@ void loop() {
     wifiAnterior = wifiConectado;
   }
   digitalWrite(PINO_LED_ONLINE, wifiConectado ? HIGH : LOW);
+
+  lerBotoes();
 
   // 2. Coleta periódica, que nunca para, com ou sem conexão
   if (millis() - ultimaLeitura >= INTERVALO_LEITURA_MS || ultimaLeitura == 0) {
