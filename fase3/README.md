@@ -157,6 +157,7 @@ acompanhe o resultado no Monitor Serial e no LED vermelho:
 | **Normal** (estado inicial) | ~26% do giro → ~74 BPM | 36,6 °C | aceleração Z = 1 g, X e Y = 0 | sem alerta, LED vermelho apagado |
 | **Taquicardia em repouso** | ~80% do giro → ~165 BPM | 36,6 °C | Z = 1 g | `ALERTA: taquicardia` |
 | **Febre** | ~74 BPM | **38,6 °C** | Z = 1 g | `ALERTA: febre` |
+| **Hipotermia** | ~74 BPM | **34,5 °C** | Z = 1 g | `ALERTA: hipotermia` |
 | **Correndo: FC alta sem alarme** | ~65% do giro → ~140 BPM | 36,6 °C | **Z = 1,5 g** (atividade) | **sem alerta**: em atividade o limite sobe para 150 BPM |
 | **Mesma FC, deitado** | ~140 BPM | 36,6 °C | volte Z para 1 g | `ALERTA: taquicardia`, mostrando que o contexto muda a decisão |
 | **Bradicardia** | ~6% do giro → ~40 BPM | 36,6 °C | Z = 1 g | `ALERTA: bradicardia` |

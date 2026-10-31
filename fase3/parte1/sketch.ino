@@ -17,6 +17,24 @@
  *
  * "Nuvem" = Serial.println com prefixo [NUVEM]. Na Parte 2 o envio passa a ser MQTT.
  *
+ * Situações para testar (mexa nas peças com a simulação rodando):
+ *   Situação                Potenciômetro   DHT22     MPU6050 (aceleração Z)  Resultado
+ *   ----------------------  --------------  --------  ----------------------  -----------------------
+ *   Normal (estado inicial) ~26% -> 74 BPM  36,6 °C   1 g                     sem alerta
+ *   Taquicardia em repouso  ~80% -> 165 BPM 36,6 °C   1 g                     ALERTA: taquicardia
+ *   Febre                   ~74 BPM         38,6 °C   1 g                     ALERTA: febre
+ *   Hipotermia              ~74 BPM         34,5 °C   1 g                     ALERTA: hipotermia
+ *   Correndo                ~65% -> 140 BPM 36,6 °C   1,5 g (atividade)       sem alerta (limite 150)
+ *   Mesma FC, deitado       ~140 BPM        36,6 °C   1 g (repouso)           ALERTA: taquicardia
+ *   Bradicardia             ~6%  -> 40 BPM  36,6 °C   1 g                     ALERTA: bradicardia
+ *   Queda                   ~74 BPM         36,6 °C   3 g (impacto)           ALERTA: queda
+ *   Sem conexão             qualquer        qualquer  qualquer                chave Wi-Fi desligada:
+ *                                                                             [OFFLINE] grava no SPIFFS
+ *   Reconexão               qualquer        qualquer  qualquer                chave ligada: [NUVEM] envia
+ *                                                                             tudo e apaga o arquivo
+ *
+ * Para voltar ao normal, desfaça o ajuste. O BPM aparece em cada [LEITURA].
+ *
  * Observação sobre o simulador: o SPIFFS do Wokwi funciona durante a sessão,
  * mas é volátil (some ao reiniciar a simulação). Num ESP32 real o arquivo
  * sobrevive a quedas de energia. O Monitor Serial registra tudo o que foi
