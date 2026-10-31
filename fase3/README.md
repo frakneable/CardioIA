@@ -15,9 +15,9 @@ transmite para a nuvem e alimenta dashboards com alertas.
 
 | Parte | Entregável | Arquivo |
 |---|---|---|
-| 1 | Projeto no Wokwi | _link a incluir_ |
+| 1 | Projeto no Wokwi | https://wokwi.com/projects/479413654575407105 |
 | 1 | Código C++ comentado (ESP32) | [`parte1/sketch.ino`](parte1/sketch.ino) |
-| 1 | Circuito do Wokwi | [`parte1/diagram.json`](parte1/diagram.json) |
+| 1 | Circuito do Wokwi e tabela de partições (cria a área do SPIFFS) | [`parte1/diagram.json`](parte1/diagram.json) · [`parte1/partitions.csv`](parte1/partitions.csv) |
 | 1 | Relatório: fluxo de funcionamento e lógica de resiliência | [`parte1/RELATORIO.md`](parte1/RELATORIO.md) |
 
 ## Parte 1 — Edge Computing
@@ -38,10 +38,16 @@ descartada, para não perder justamente o episódio clínico. Detalhes no
 
 ### Como rodar no Wokwi
 
+O projeto já está montado e salvo em
+**https://wokwi.com/projects/479413654575407105**. Para recriar do zero:
+
 1. Em [wokwi.com](https://wokwi.com), crie um projeto **ESP32** novo.
 2. Substitua o conteúdo de `sketch.ino` e `diagram.json` pelos desta pasta.
-3. Em **Library Manager**, adicione as bibliotecas de `libraries.txt`.
-4. Inicie a simulação e use os controles:
+3. Crie o arquivo `partitions.csv` (menu ▾ ao lado das abas → *New file...*)
+   com o conteúdo desta pasta. Sem ele, o ESP32 do Wokwi não tem partição de
+   dados e o SPIFFS falha com `spiffs partition could not be found`.
+4. Em **Library Manager**, adicione as bibliotecas de `libraries.txt`.
+5. Inicie a simulação e use os controles:
    - **chave deslizante:** liga e desliga o Wi-Fi;
    - **potenciômetro:** muda o BPM;
    - **DHT22:** clique nele e altere a temperatura;

@@ -2,6 +2,8 @@
 
 **CardioIA — Fase 3** · Victor Copque dos Reis (RM566821) · Victor Hugo Ferreira Rolim (RM568006)
 
+Projeto no Wokwi: https://wokwi.com/projects/479413654575407105
+
 ## 1. O que o protótipo simula
 
 Um vestível de monitoramento cardíaco: uma pulseira ou patch que acompanha o
@@ -110,7 +112,9 @@ leitura.
 
 Como o enunciado aponta, o SPIFFS do Wokwi funciona **durante a sessão** (dá
 para ver o arquivo crescer, ser compactado e ser apagado), mas some quando a
-simulação é reiniciada. Num ESP32 físico o mesmo código mantém os dados entre
+simulação é reiniciada. Para funcionar no Wokwi, o projeto inclui um
+`partitions.csv` com uma partição `spiffs` de 1,375 MB: sem ela, o ESP32
+simulado não tem área de dados e a montagem falha. Num ESP32 físico o mesmo código mantém os dados entre
 quedas de energia. Por isso o Monitor Serial também funciona como trilha de
 auditoria: cada leitura, gravação, compactação e envio aparece nele.
 
