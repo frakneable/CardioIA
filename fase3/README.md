@@ -24,6 +24,8 @@ transmite para a nuvem e alimenta dashboards com alertas.
 | 2 | Fluxo e dashboard do Node-RED (export) | [`parte2/node-red/flows.json`](parte2/node-red/flows.json) |
 | 2 | Prints da dashboard, do fluxo e do Wokwi | [`parte2/prints/`](parte2/prints/) |
 | 2 | Relatório: fluxo de comunicação MQTT e configuração da dashboard | [`parte2/RELATORIO.pdf`](parte2/RELATORIO.pdf) · [`parte2/RELATORIO.md`](parte2/RELATORIO.md) |
+| Ir Além 1 | API REST e cliente em Python, verificação de risco e e-mail automático | [`ir_alem_1/`](ir_alem_1/README.md) |
+| Ir Além 1 | Relatório: fluxo implementado | [`ir_alem_1/RELATORIO.pdf`](ir_alem_1/RELATORIO.pdf) · [`ir_alem_1/RELATORIO.md`](ir_alem_1/RELATORIO.md) |
 
 ## Parte 1 — Edge Computing
 
@@ -217,3 +219,22 @@ e o ESP32 calcula o BPM pela média dos intervalos.
 
 Instruções completas, tópicos e prints: [`parte2/README.md`](parte2/README.md).
 Relatório: [`parte2/RELATORIO.pdf`](parte2/RELATORIO.pdf).
+
+## Ir Além 1 — API REST e e-mail automático
+
+Uma **API REST em Python** (Flask + SQLite) recebe as leituras do vestível,
+verifica o risco (taquicardia, bradicardia, febre, hipotermia, queda e
+**ausência de movimento**, que depende do histórico e por isso só a nuvem
+consegue detectar) e **dispara um e-mail** para a enfermagem quando surge um
+alerta novo. Um cliente com `requests` simula o vestível e consulta a API.
+
+```bash
+cd fase3/ir_alem_1 && pip install -r requirements.txt
+python api.py                 # terminal 1
+python cliente.py simular     # terminal 2: 40 leituras, 5 alertas, 5 e-mails
+```
+
+![E-mail de alerta gerado automaticamente](ir_alem_1/prints/02-email-alerta.png)
+
+Instruções, rotas e regras: [`ir_alem_1/README.md`](ir_alem_1/README.md).
+Relatório: [`ir_alem_1/RELATORIO.pdf`](ir_alem_1/RELATORIO.pdf).
