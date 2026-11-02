@@ -23,3 +23,7 @@ fase3/parte2/node-red/flows_cred.json
 fase3/parte2/node-red/settings.js
 fase3/parte2/node-red/lib/
 fase3/parte2/node-red/context/
+
+# Ir Além 1 (fase3): banco e e-mails gerados na execução
+fase3/ir_alem_1/cardioia.db
+fase3/ir_alem_1/caixa_saida/
