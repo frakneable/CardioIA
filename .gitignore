@@ -27,3 +27,7 @@ fase3/parte2/node-red/context/
 # Ir Além 1 (fase3): banco e e-mails gerados na execução
 fase3/ir_alem_1/cardioia.db
 fase3/ir_alem_1/caixa_saida/
+
+# Ir Além 2 (fase3): dados baixados do PhysioNet e roteiro do vídeo
+fase3/ir_alem_2/dados/
+fase3/ir_alem_2/ROTEIRO_VIDEO.md

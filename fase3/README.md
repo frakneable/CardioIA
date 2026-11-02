@@ -26,6 +26,8 @@ transmite para a nuvem e alimenta dashboards com alertas.
 | 2 | Relatório: fluxo de comunicação MQTT e configuração da dashboard | [`parte2/RELATORIO.pdf`](parte2/RELATORIO.pdf) · [`parte2/RELATORIO.md`](parte2/RELATORIO.md) |
 | Ir Além 1 | API REST e cliente em Python, verificação de risco e e-mail automático | [`ir_alem_1/`](ir_alem_1/README.md) |
 | Ir Além 1 | Relatório: fluxo implementado | [`ir_alem_1/RELATORIO.pdf`](ir_alem_1/RELATORIO.pdf) · [`ir_alem_1/RELATORIO.md`](ir_alem_1/RELATORIO.md) |
+| Ir Além 2 | Notebook: regressão logística × rede neuromórfica LIF em séries de batimentos | [`ir_alem_2/series_temporais_lif.ipynb`](ir_alem_2/series_temporais_lif.ipynb) |
+| Ir Além 2 | Relatório comparativo e vídeo | [`ir_alem_2/RELATORIO.pdf`](ir_alem_2/RELATORIO.pdf) · [`ir_alem_2/README.md`](ir_alem_2/README.md) |
 
 ## Parte 1 — Edge Computing
 
@@ -238,3 +240,17 @@ python cliente.py simular     # terminal 2: 40 leituras, 5 alertas, 5 e-mails
 
 Instruções, rotas e regras: [`ir_alem_1/README.md`](ir_alem_1/README.md).
 Relatório: [`ir_alem_1/RELATORIO.pdf`](ir_alem_1/RELATORIO.pdf).
+
+## Ir Além 2 — IA em séries temporais: regressão logística × rede LIF
+
+Com batimentos reais do **MIT-BIH** (treino e teste com pacientes diferentes),
+comparamos uma **regressão logística** com uma **rede neuromórfica de 300
+neurônios LIF**, as duas com a mesma entrada: a onda do batimento e a série
+dos intervalos RR. Com sinal limpo, a regressão logística vence (acurácia
+balanceada 0,898 × 0,828). Com ruído forte, a LIF se mantém (0,867) e a
+regressão logística cai para 0,589. Numa CPU, a LIF custa ~1.000× mais.
+
+![Acurácia balanceada com ruído crescente](ir_alem_2/figuras/robustez.png)
+
+Notebook, resultados e vídeo: [`ir_alem_2/README.md`](ir_alem_2/README.md).
+Relatório: [`ir_alem_2/RELATORIO.pdf`](ir_alem_2/RELATORIO.pdf).
